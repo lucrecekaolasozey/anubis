@@ -3,12 +3,10 @@ import axios from "axios";
 
 const { Pool } = pkg;
 
+// Используем переменные окружения из .env
 const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "anubis_bd",
-  password: "admin",
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
 });
 
 const CLANKER_URL =
